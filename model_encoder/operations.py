@@ -2,6 +2,12 @@ from collections import namedtuple
 import numpy as np
 import torch.nn as nn
 
+try:
+    import graphviz
+    viz = True
+except ImportError:
+    print("Graphviz not installed; cell visualization functionality disabled")
+    viz = False
 
 # === HELPERS ==========================================================================================================
 # calculate padding based on stride, kernel size, and dilation.
@@ -55,6 +61,20 @@ def build_operation(name, function, mod=None):
         mod = [1, 1, 1]
     mod = [1] + mod
     return Operation(name=name, function=function, mod=mod)
+
+
+# === CELL VISUALIZER ==================================================================================================
+def cell_visualizer(cell):
+    if not viz:
+        return None
+    G = graphviz.Digraph()
+    for key, val in cell.items():
+        a, b = str(key[0]), str(key[1])
+        G.node(a)
+        G.node(b)
+        for op in val:
+            G.edge(a,b,label=op)
+    return G
 
 
 # === OUTPUT FUNCTIONS =================================================================================================
