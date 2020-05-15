@@ -1,0 +1,5 @@
+data/CIFAR10/**
+.ipynb_checkpoints/**
+**/__pycache__/**
+
+
