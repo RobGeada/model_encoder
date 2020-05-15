@@ -25,9 +25,9 @@ def build_operation_set(*ops):
         print("{:>2} | {:<15} | {:^3} | {:^3} | {:^3} |".format(
             i,
             op.name,
-            op.mod[0],
             op.mod[1],
             op.mod[2],
+            op.mod[3],
         ))
     return operation_set
 
